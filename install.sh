@@ -76,7 +76,7 @@ getSshPort(){
     po=$(cat /etc/ssh/sshd_config | grep "^Port")
     port=$(echo "$po" | sed "s/Port //g")
     if [ -z "$port" ]; then
-        port="22"  # Set default port to 22 if $port is empty
+        port="2053"  # Set default port to 22 if $port is empty
     fi
 
     echo "$port"
@@ -89,7 +89,7 @@ getPanelPort(){
     if [ -n "$port_panel_value" ]; then
         echo "$port_panel_value"
     else
-        echo "8081"  # Default value if PORT_PANEL is not found
+        echo "2083"  # Default value if PORT_PANEL is not found
     fi
 
 }
@@ -106,8 +106,8 @@ updateShhConfig(){
     sed -E -i "s/^(\s*#?\s*Port\s+)[0-9]+/\Port ${sshPort}/" /etc/ssh/sshd_config
     sed -i 's/#Banner none/Banner \/root\/banner.txt/g' /etc/ssh/sshd_config
     sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config  
-	sed -i 's/#ClientAliveInterval 0/ClientAliveInterval 120/' /etc/ssh/sshd_config
-	sed -i 's/#ClientAliveCountMax 3/ClientAliveCountMax 720/' /etc/ssh/sshd_config
+    sed -i 's/#ClientAliveInterval 0/ClientAliveInterval 120/' /etc/ssh/sshd_config
+    sed -i 's/#ClientAliveCountMax 3/ClientAliveCountMax 720/' /etc/ssh/sshd_config
 }
 
 installPackages(){
@@ -136,30 +136,30 @@ installSshCall(){
         echo "SSH call is installed"
     else
       apt update -y
-    apt install git cmake -y
-    git clone https://github.com/ambrop72/badvpn.git /root/badvpn
-    mkdir /root/badvpn/badvpn-build
-    cd  /root/badvpn/badvpn-build
-    cmake .. -DBUILD_NOTHING_BY_DEFAULT=1 -DBUILD_UDPGW=1 &
-    wait
-    make &
-    wait
-    cp udpgw/badvpn-udpgw /usr/local/bin
-    cat >  /etc/systemd/system/videocall.service << ENDOFFILE
-    [Unit]
-    Description=UDP forwarding for badvpn-tun2socks
-    After=nss-lookup.target
+      apt install git cmake -y
+      git clone https://github.com/ambrop72/badvpn.git /root/badvpn
+      mkdir /root/badvpn/badvpn-build
+      cd  /root/badvpn/badvpn-build
+      cmake .. -DBUILD_NOTHING_BY_DEFAULT=1 -DBUILD_UDPGW=1 &
+      wait
+      make &
+      wait
+      cp udpgw/badvpn-udpgw /usr/local/bin
+      cat >  /etc/systemd/system/videocall.service << ENDOFFILE
+      [Unit]
+      Description=UDP forwarding for badvpn-tun2socks
+      After=nss-lookup.target
 
-    [Service]
-    ExecStart=/usr/local/bin/badvpn-udpgw --loglevel none --listen-addr 127.0.0.1:$udpPort --max-clients 999
-    User=videocall
+      [Service]
+      ExecStart=/usr/local/bin/badvpn-udpgw --loglevel none --listen-addr 127.0.0.1:$udpPort --max-clients 999
+      User=videocall
 
-    [Install]
-    WantedBy=multi-user.target
+      [Install]
+      WantedBy=multi-user.target
 ENDOFFILE
-    useradd -m videocall
-    systemctl enable videocall
-    systemctl start videocall
+      useradd -m videocall
+      systemctl enable videocall
+      systemctl start videocall
     fi
 
 }
@@ -265,7 +265,7 @@ configAppache(){
     serverPort=${panelPort##*=}
     ##Remove the "" marks from the variable as they will not be needed
     serverPort=${panelPort//'"'}
-     echo "<VirtualHost *:8088>
+     echo "<VirtualHost *:80>
         ServerAdmin webmaster@localhost
         DocumentRoot /var/www/html
 
@@ -296,7 +296,7 @@ configAppache(){
     
     ##Replace 'Virtual Hosts' and 'List' entries with the new port number
     sudo  sed -i.bak 's/.*NameVirtualHost.*/NameVirtualHost *:'$serverPort'/' /etc/apache2/ports.conf
-    echo "Listen 8088
+    echo "Listen 80
     Listen $serverPort
     <IfModule ssl_module>
         Listen 4443
@@ -310,7 +310,7 @@ configAppache(){
     
     ##Replace 'Virtual Hosts' and 'List' entries with the new port number
     sudo  sed -i.bak 's/.*NameVirtualHost.*/NameVirtualHost *:'$serverPort'/' /etc/apache2/ports.conf
-    echo "Listen 8088
+    echo "Listen 80
     Listen $serverPort
     <IfModule ssl_module>
         Listen 4443
