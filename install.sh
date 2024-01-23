@@ -458,8 +458,7 @@ ENDOFFILE
 }
 
 finalCopy(){
-    cd ..
-    cd ..
+    cd /
     cd /var/www/html/
     unzip -o update.zip
 }
