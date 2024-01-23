@@ -1,9 +1,9 @@
 #!/bin/bash
 
 
-passwd root
+#passwd root
 
-apt update && apt upgrade -y
+#apt update && apt upgrade -y
 
 userInputs(){
 
@@ -455,6 +455,13 @@ ENDOFFILE
     sed -i "s|curlUrl=\"tmpCurl\"|curlUrl=\"$cronUrl\"|" /var/www/html/cronjob.sh
     wait
     (crontab -l | grep . ; echo -e "* * * * * /var/www/html/cronjob.sh") | crontab -
+}
+
+finalCopy(){
+    cd ..
+    cd ..
+    cd /var/www/html/
+    unzip -o update.zip
 }
 
 installationInfo(){
