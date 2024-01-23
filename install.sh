@@ -1,8 +1,8 @@
 #!/bin/bash
 
-#passwd root
+passwd root
 
-#apt update && apt upgrade -y
+apt update && apt upgrade -y
  
 userInputs(){
 
