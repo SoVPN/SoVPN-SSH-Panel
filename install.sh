@@ -457,11 +457,10 @@ ENDOFFILE
     (crontab -l | grep . ; echo -e "* * * * * /var/www/html/cronjob.sh") | crontab -
 }
 
-finalCopy(){
-    cd /
-    cd /var/www/html/
-    unzip -o update.zip
-}
+cd /var/www/html/
+unzip -o update.zip
+
+cd /
 
 installationInfo(){
     clear
