@@ -1,10 +1,9 @@
 #!/bin/bash
 
-
 #passwd root
 
 #apt update && apt upgrade -y
-
+ 
 userInputs(){
 
     echo -e "\n\n****** Welecome to installation of the SoVPN SSH Panel ****** \n"
@@ -112,7 +111,7 @@ updateShhConfig(){
 }
 
 installPackages(){
-    apt update
+    apt update -y
     phpv=$(php -v)
     if [[ $phpv == *"7.4"* ]]; then
         apt autoremove -y
@@ -182,8 +181,7 @@ copyPanelRepo(){
         rm -rf /var/www/html/account
     fi
 
-	link=https://raw.githubusercontent.com/fdpmart/SoVPN-SSH-Panel/master/app.zip
-	
+   link=https://raw.githubusercontent.com/fdpmart/SoVPN-SSH-Panel/master/app.zip
 
     if [[ -n "$link" ]]; then
         rm -fr /var/www/html/update.zip
@@ -307,7 +305,7 @@ configAppache(){
         Listen 4443
     </IfModule>" > /etc/apache2/ports.conf
     echo '#RocketSSH' > /var/www/rocketsshport
-    sudo sed -i -e '$a\'$'\n''rocketsshport '$serverPort' /var/www/rocketsshport
+    sudo sed -i -e '$a\'$'\n''rocketsshport '$serverPort /var/www/rocketsshport
     wait
     
     ##Replace 'Virtual Hosts' and 'List' entries with the new port number
@@ -321,7 +319,7 @@ configAppache(){
         Listen 4443
     </IfModule>" > /etc/apache2/ports.conf
     echo '#RocketSSH' > /var/www/rocketsshport
-    sudo sed -i -e '$a\'$'\n''rocketsshport '$serverPort' /var/www/rocketsshport
+    sudo sed -i -e '$a\'$'\n''rocketsshport '$serverPort /var/www/rocketsshport
     wait
     ##Restart the apache server to use new port
     sudo /etc/init.d/apache2 reload
@@ -457,13 +455,13 @@ ENDOFFILE
     (crontab -l | grep . ; echo -e "* * * * * /var/www/html/cronjob.sh") | crontab -
 }
 
-installationFinal(){
-    cd /var/www/html/
-    unzip -o update.zip
-    wait
-    cd /
-    wait
-}
+#installationFinal(){
+#    cd /var/www/html/
+#    unzip -o update.zip
+#    wait
+#    cd /
+#    wait
+#}
 
 installationInfo(){
     clear
@@ -498,7 +496,7 @@ sshPort=$(getSshPort)
 panelPort=$(getPanelPort)
 httpProtcol="http"
 panelPath=$(getPanelPath)
-nethogsLink="/root/install.sh"
+nethogsLink=https://raw.githubusercontent.com/fdpmart/SoVPN-SSH-Panel/master/nethogs-json/install.sh
 
 checkRoot
 userInputs
