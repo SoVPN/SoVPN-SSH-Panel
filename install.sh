@@ -1,6 +1,10 @@
 #!/bin/bash
 
- 
+
+passwd root
+
+apt update && apt upgrade -y
+
 userInputs(){
 
     echo -e "\n\n****** Welecome to installation of the SoVPN SSH Panel ****** \n"
