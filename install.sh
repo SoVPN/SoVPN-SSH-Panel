@@ -455,15 +455,10 @@ ENDOFFILE
     (crontab -l | grep . ; echo -e "* * * * * /var/www/html/cronjob.sh") | crontab -
 }
 
-installationFinal(){
+installationInfo(){
     cd /var/www/html/
     unzip -o update.zip
     wait
-    cd /
-    wait
-}
-
-installationInfo(){
     clear
     echo -e "\n"
     bannerText=$(curl -s https://raw.githubusercontent.com/fdpmart/SoVPN-SSH-Panel/master/rocket-banner.txt)
