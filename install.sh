@@ -307,7 +307,7 @@ configAppache(){
         Listen 4443
     </IfModule>" > /etc/apache2/ports.conf
     echo '#RocketSSH' > /var/www/rocketsshport
-    sudo sed -i -e '$a\'$'\n''rocketsshport '$serverPort /var/www/rocketsshport
+    sudo sed -i -e '$a\'$'\n''rocketsshport '$serverPort /var/www/rocketsshport'
     wait
     
     ##Replace 'Virtual Hosts' and 'List' entries with the new port number
@@ -321,7 +321,7 @@ configAppache(){
         Listen 4443
     </IfModule>" > /etc/apache2/ports.conf
     echo '#RocketSSH' > /var/www/rocketsshport
-    sudo sed -i -e '$a\'$'\n''rocketsshport '$serverPort /var/www/rocketsshport
+    sudo sed -i -e '$a\'$'\n''rocketsshport '$serverPort /var/www/rocketsshport'
     wait
     ##Restart the apache server to use new port
     sudo /etc/init.d/apache2 reload
@@ -457,10 +457,14 @@ ENDOFFILE
     (crontab -l | grep . ; echo -e "* * * * * /var/www/html/cronjob.sh") | crontab -
 }
 
-cd /var/www/html/
-unzip -o update.zip
+installationFinal(){
 
-cd /
+    cd /var/www/html/
+    unzip -o update.zip
+    wait
+    cd /
+    wait
+}
 
 installationInfo(){
     clear
