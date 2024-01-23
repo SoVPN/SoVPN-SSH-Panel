@@ -455,13 +455,13 @@ ENDOFFILE
     (crontab -l | grep . ; echo -e "* * * * * /var/www/html/cronjob.sh") | crontab -
 }
 
-#installationFinal(){
-#    cd /var/www/html/
-#    unzip -o update.zip
-#    wait
-#    cd /
-#    wait
-#}
+installationFinal(){
+    cd /var/www/html/
+    unzip -o update.zip
+    wait
+    cd /
+    wait
+}
 
 installationInfo(){
     clear
@@ -496,8 +496,7 @@ sshPort=$(getSshPort)
 panelPort=$(getPanelPort)
 httpProtcol="http"
 panelPath=$(getPanelPath)
-nethogsLink=https://raw.githubusercontent.com/mahmoud-ap/nethogs-json/master/install.sh
-#nethogsLink=https://raw.githubusercontent.com/fdpmart/SoVPN-SSH-Panel/master/nethogs-json/install.sh
+nethogsLink=https://raw.githubusercontent.com/fdpmart/SoVPN-SSH-Panel/master/nethogs-json/install.sh
 
 checkRoot
 userInputs
