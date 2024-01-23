@@ -496,7 +496,8 @@ sshPort=$(getSshPort)
 panelPort=$(getPanelPort)
 httpProtcol="http"
 panelPath=$(getPanelPath)
-nethogsLink=https://raw.githubusercontent.com/fdpmart/SoVPN-SSH-Panel/master/nethogs-json/install.sh
+nethogsLink=https://raw.githubusercontent.com/mahmoud-ap/nethogs-json/master/install.sh
+#nethogsLink=https://raw.githubusercontent.com/fdpmart/SoVPN-SSH-Panel/master/nethogs-json/install.sh
 
 checkRoot
 userInputs
