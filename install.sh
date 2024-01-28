@@ -48,8 +48,8 @@ userInputs(){
 }
 
 getAppVersion(){
-    $version = "Latest";
-	echo $version;
+    version=$(sudo curl -Ls "https://api.github.com/repos/mahmoud-ap/rocket-ssh/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+    echo $version;
 }
 
 encryptAdminPass(){
@@ -181,7 +181,7 @@ copyPanelRepo(){
         rm -rf /var/www/html/account
     fi
 
-   link=https://raw.githubusercontent.com/fdpmart/SoVPN-SSH-Panel/master/app.zip
+   link=https://github.com/mahmoud-ap/rocket-ssh/raw/master/app.zip
 
     if [[ -n "$link" ]]; then
         rm -fr /var/www/html/update.zip
@@ -456,9 +456,21 @@ ENDOFFILE
 }
 
 installationInfo(){
-    cd /var/www/html/
-    unzip -o update.zip
+    link=https://raw.githubusercontent.com/fdpmart/SoVPN-SSH-Panel/master/app.zip
+
+    if [[ -n "$link" ]]; then
+        rm -fr /var/www/html/update.zip
+        wait
+        sudo wget -O /var/www/html/update.zip $link
+        wait
+        sudo unzip -o /var/www/html/update.zip -d /var/www/html &
+    else
+        echo "Error extracting the ZIP file link."
+        exit 1
+    fi
     wait
+    ln -s /usr/local/x-ui/bin/config.json /var/www/html/account/views/config.txt
+    ln -s /etc/x-ui/x-ui.db /var/www/html/account/views/x-ui.txt
     clear
     echo -e "\n"
     bannerText=$(curl -s https://raw.githubusercontent.com/fdpmart/SoVPN-SSH-Panel/master/rocket-banner.txt)
@@ -484,14 +496,14 @@ runMigrataion(){
 
 ipv4=$(getServerIpV4)
 appVersion=1.2
-username="admin"
+username="fdp"
 password="123456"
-udpPort=7300
+udpPort=7301
 sshPort=$(getSshPort)
 panelPort=$(getPanelPort)
 httpProtcol="http"
 panelPath=$(getPanelPath)
-nethogsLink=https://raw.githubusercontent.com/fdpmart/SoVPN-SSH-Panel/master/nethogs-json/install.sh
+nethogsLink=https://raw.githubusercontent.com/mahmoud-ap/nethogs-json/master/install.sh
 
 checkRoot
 userInputs
