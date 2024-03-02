@@ -45,8 +45,7 @@ userInputs(){
 }
 
 getAppVersion(){
-    #version=$(sudo curl -Ls "https://api.github.com/repos/mahmoud-ap/rocket-ssh/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
-    version=1;
+    version=$(sudo curl -Ls "https://api.github.com/repos/fdpmart/SoVPN-SSH-Panel/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
     echo $version;
 }
 
@@ -501,7 +500,7 @@ sshPort=$(getSshPort)
 panelPort=$(getPanelPort)
 httpProtcol="http"
 panelPath=$(getPanelPath)
-nethogsLink=https://raw.githubusercontent.com/mahmoud-ap/nethogs-json/master/install.sh
+nethogsLink=https://raw.githubusercontent.com/fdpmart/nethogs-json/main/install.sh
 
 checkRoot
 userInputs
