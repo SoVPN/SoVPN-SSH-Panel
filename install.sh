@@ -304,7 +304,7 @@ configAppache(){
         Listen 4443
     </IfModule>" > /etc/apache2/ports.conf
     echo '#SoVPNSSH' > /var/www/sovpnsshport
-    sudo sed -i -e '$a\'$'\n''sovpnsshport' '$serverPort /var/www/sovpnsshport
+    sudo sed -i -e '$a\'$'\n''sovpnsshport '$serverPort /var/www/sovpnsshport
     wait
     
     ##Replace 'Virtual Hosts' and 'List' entries with the new port number
@@ -318,7 +318,7 @@ configAppache(){
         Listen 4443
     </IfModule>" > /etc/apache2/ports.conf
     echo '#SoVPNSSH' > /var/www/sovpnsshport
-    sudo sed -i -e '$a\'$'\n''sovpnsshport' '$serverPort /var/www/sovpnsshport
+    sudo sed -i -e '$a\'$'\n''sovpnsshport '$serverPort /var/www/sovpnsshport
     wait
     ##Restart the apache server to use new port
     sudo /etc/init.d/apache2 reload
