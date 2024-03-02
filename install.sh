@@ -1,7 +1,5 @@
 #!/bin/bash
 
-passwd root
-
 apt update && apt upgrade -y
  
 userInputs(){
@@ -89,7 +87,7 @@ getPanelPort(){
     if [ -n "$port_panel_value" ]; then
         echo "$port_panel_value"
     else
-        echo "2083"  # Default value if PORT_PANEL is not found
+        echo "2088"  # Default value if PORT_PANEL is not found
     fi
 
 }
@@ -257,7 +255,7 @@ copyPanelRepo(){
     wait
     sudo service apache2 restart
     wait
-    sudo sed -i "s/AllowOverride None/AllowOverride All/g" /etc/apache2/apache2.conf &
+    sudo sed -i "s/AllowOverride None/AllowOverride All/g /etc/apache2/apache2.conf &
     wait
 }
 
@@ -304,8 +302,8 @@ configAppache(){
     <IfModule mod_gnutls.c>
         Listen 4443
     </IfModule>" > /etc/apache2/ports.conf
-    echo '#RocketSSH' > /var/www/rocketsshport
-    sudo sed -i -e '$a\'$'\n''rocketsshport '$serverPort /var/www/rocketsshport
+    echo '#SoVPNSSH' > /var/www/sovpnsshport
+    sudo sed -i -e '$a\'$'\n''sovpnsshport' '$serverPort /var/www/sovpnsshport
     wait
     
     ##Replace 'Virtual Hosts' and 'List' entries with the new port number
@@ -318,8 +316,8 @@ configAppache(){
     <IfModule mod_gnutls.c>
         Listen 4443
     </IfModule>" > /etc/apache2/ports.conf
-    echo '#RocketSSH' > /var/www/rocketsshport
-    sudo sed -i -e '$a\'$'\n''rocketsshport '$serverPort /var/www/rocketsshport
+    echo '#SoVPNSSH' > /var/www/sovpnsshport
+    sudo sed -i -e '$a\'$'\n''sovpnsshport' '$serverPort /var/www/sovpnsshport
     wait
     ##Restart the apache server to use new port
     sudo /etc/init.d/apache2 reload
@@ -344,7 +342,7 @@ installNethogs(){
 }
 
 configDatabase(){
-    dbName="RocketSSH"
+    dbName="SoVPNSSH"
     dbPrefix="cp_"
     appVersion=$(getAppVersion)
     mysql -e "create database $dbName;" &
@@ -355,24 +353,24 @@ configDatabase(){
     wait
 
     # Dump and remove the old database
-    if mysql -u root -e "USE RokcetSSH" 2>/dev/null; then
+    if mysql -u root -e "USE SoVPNSSH" 2>/dev/null; then
         # Dump and restore the old database to the new database
-        mysqldump -u root --force RokcetSSH | mysql -u root $dbName
-        echo "Data has been dumped from 'RokcetSSH' to '$dbName'."
+        mysqldump -u root --force SoVPNSSH | mysql -u root $dbName
+        echo "Data has been dumped from 'SoVPNSSH' to '$dbName'."
 
         # Remove the old database
-        mysql -u root -e "DROP DATABASE RokcetSSH;"
-        echo "Old database 'RokcetSSH' has been removed."
+        mysql -u root -e "DROP DATABASE SoVPNSSH;"
+        echo "Old database 'SoVPNSSH' has been removed."
     else
-        echo "Database 'RokcetSSH' does not exist."
+        echo "Database 'SoVPNSSH' does not exist."
     fi
 
-    sed -i "s/DB_DATABASE=rocket_ssh/DB_DATABASE=${dbName}/" /var/www/html/panel/.env
+    sed -i "s/DB_DATABASE=sovpn_ssh/DB_DATABASE=${dbName}/" /var/www/html/panel/.env
     sed -i "s/DB_USERNAME=root/DB_USERNAME=$username/" /var/www/html/panel/.env
     sed -i "s/DB_PASSWORD=/DB_PASSWORD=$password/" /var/www/html/panel/.env
     sed -i "s/PORT_SSH=22/PORT_SSH=$sshPort/" /var/www/html/panel/.env
-    sed -i "s/PORT_UDP=7302/PORT_UDP=$udpPort/" /var/www/html/panel/.env
-    sed -i "s/PORT_PANEL=8081/PORT_PANEL=$panelPort/" /var/www/html/panel/.env
+    sed -i "s/PORT_UDP=7301/PORT_UDP=$udpPort/" /var/www/html/panel/.env
+    sed -i "s/PORT_PANEL=2088/PORT_PANEL=$panelPort/" /var/www/html/panel/.env
 
     hashedPassword=$(php -r "echo password_hash('$password', PASSWORD_BCRYPT);")
     nowTime=$(php -r "echo time();")
