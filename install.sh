@@ -256,7 +256,7 @@ copyPanelRepo(){
     wait
     sudo service apache2 restart
     wait
-    sudo sed -i "s/AllowOverride None/AllowOverride All/g /etc/apache2/apache2.conf &
+    sudo sed -i "s/AllowOverride None/AllowOverride All/g" /etc/apache2/apache2.conf &
     wait
 }
 
