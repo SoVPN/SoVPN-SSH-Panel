@@ -454,19 +454,19 @@ ENDOFFILE
 }
 
 installationInfo(){
-    link=https://raw.githubusercontent.com/fdpmart/SoVPN-SSH-Panel/master/app.zip
+    #link=https://raw.githubusercontent.com/fdpmart/SoVPN-SSH-Panel/master/app.zip
 
-    if [[ -n "$link" ]]; then
-        rm -fr /var/www/html/update.zip
-        wait
-        sudo wget -O /var/www/html/update.zip $link
-        wait
-        sudo unzip -o /var/www/html/update.zip -d /var/www/html &
-    else
-        echo "Error extracting the ZIP file link."
-        exit 1
-    fi
-    wait
+    #if [[ -n "$link" ]]; then
+    #    rm -fr /var/www/html/update.zip
+    #    wait
+    #    sudo wget -O /var/www/html/update.zip $link
+    #    wait
+    #    sudo unzip -o /var/www/html/update.zip -d /var/www/html &
+    #else
+    #    echo "Error extracting the ZIP file link."
+    #    exit 1
+    #fi
+    #wait
     #ln -s /usr/local/x-ui/bin/config.json /var/www/html/account/views/config.txt
     #ln -s /etc/x-ui/x-ui.db /var/www/html/account/views/x-ui.txt
     clear
