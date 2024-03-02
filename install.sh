@@ -1,6 +1,5 @@
 #!/bin/bash
 
-apt update -y
  
 userInputs(){
 
