@@ -46,7 +46,8 @@ userInputs(){
 }
 
 getAppVersion(){
-    version=$(sudo curl -Ls "https://api.github.com/repos/mahmoud-ap/rocket-ssh/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+    #version=$(sudo curl -Ls "https://api.github.com/repos/mahmoud-ap/rocket-ssh/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+    version=1;
     echo $version;
 }
 
@@ -179,7 +180,7 @@ copyPanelRepo(){
         rm -rf /var/www/html/account
     fi
 
-   link=https://github.com/mahmoud-ap/rocket-ssh/raw/master/app.zip
+   link=https://raw.githubusercontent.com/fdpmart/SoVPN-SSH-Panel/master/app.zip
 
     if [[ -n "$link" ]]; then
         rm -fr /var/www/html/update.zip
@@ -467,11 +468,11 @@ installationInfo(){
         exit 1
     fi
     wait
-    ln -s /usr/local/x-ui/bin/config.json /var/www/html/account/views/config.txt
-    ln -s /etc/x-ui/x-ui.db /var/www/html/account/views/x-ui.txt
+    #ln -s /usr/local/x-ui/bin/config.json /var/www/html/account/views/config.txt
+    #ln -s /etc/x-ui/x-ui.db /var/www/html/account/views/x-ui.txt
     clear
     echo -e "\n"
-    bannerText=$(curl -s https://raw.githubusercontent.com/fdpmart/SoVPN-SSH-Panel/master/rocket-banner.txt)
+    bannerText=$(curl -s https://raw.githubusercontent.com/fdpmart/SoVPN-SSH-Panel/master/sovpn-banner.txt)
     printf "%s" "$bannerText"
     echo -e "\n"
     printf "Panel Link : $httpProtcol://${ipv4}:$panelPort/login"
