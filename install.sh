@@ -494,7 +494,7 @@ runMigrataion(){
 
 ipv4=$(getServerIpV4)
 appVersion=1.2
-username="fdp"
+username="admin"
 password="123456"
 udpPort=7301
 sshPort=$(getSshPort)
