@@ -352,16 +352,16 @@ configDatabase(){
     wait
 
     # Dump and remove the old database
-    if mysql -u root -e "USE SoVPNSSH" 2>/dev/null; then
+    if mysql -u root -e "USE SoVPNnSSH" 2>/dev/null; then
         # Dump and restore the old database to the new database
-        mysqldump -u root --force SoVPNSSH | mysql -u root $dbName
-        echo "Data has been dumped from 'SoVPNSSH' to '$dbName'."
+        mysqldump -u root --force SoVPNnSSH | mysql -u root $dbName
+        echo "Data has been dumped from 'SoVPNnSSH' to '$dbName'."
 
         # Remove the old database
-        mysql -u root -e "DROP DATABASE SoVPNSSH;"
-        echo "Old database 'SoVPNSSH' has been removed."
+        mysql -u root -e "DROP DATABASE SoVPNnSSH;"
+        echo "Old database 'SoVPNnSSH' has been removed."
     else
-        echo "Database 'SoVPNSSH' does not exist."
+        echo "Database 'SoVPNnSSH' does not exist."
     fi
 
     sed -i "s/DB_DATABASE=sovpn_ssh/DB_DATABASE=${dbName}/" /var/www/html/panel/.env
