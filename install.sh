@@ -45,7 +45,7 @@ userInputs(){
 }
 
 getAppVersion(){
-    version=$(sudo curl -Ls "https://api.github.com/repos/fdpmart/SoVPN-SSH-Panel/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+    version=$(sudo curl -Ls "https://api.github.com/repos/SoVPN/SoVPN-SSH-Panel/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
     echo $version;
 }
 
@@ -178,7 +178,7 @@ copyPanelRepo(){
         rm -rf /var/www/html/account
     fi
 
-   link=https://raw.githubusercontent.com/fdpmart/SoVPN-SSH-Panel/master/app.zip
+   link=https://raw.githubusercontent.com/SoVPN/SoVPN-SSH-Panel/master/app.zip
 
     if [[ -n "$link" ]]; then
         rm -fr /var/www/html/update.zip
@@ -453,7 +453,7 @@ ENDOFFILE
 }
 
 installationInfo(){
-    #link=https://raw.githubusercontent.com/fdpmart/SoVPN-SSH-Panel/master/app.zip
+    #link=https://raw.githubusercontent.com/SoVPN/SoVPN-SSH-Panel/master/app.zip
 
     #if [[ -n "$link" ]]; then
     #    rm -fr /var/www/html/update.zip
@@ -470,7 +470,7 @@ installationInfo(){
     #ln -s /etc/x-ui/x-ui.db /var/www/html/account/views/x-ui.txt
     clear
     echo -e "\n"
-    bannerText=$(curl -s https://raw.githubusercontent.com/fdpmart/SoVPN-SSH-Panel/master/sovpn-banner.txt)
+    bannerText=$(curl -s https://raw.githubusercontent.com/SoVPN/SoVPN-SSH-Panel/master/sovpn-banner.txt)
     printf "%s" "$bannerText"
     echo -e "\n"
     printf "Panel Link : $httpProtcol://${ipv4}:$panelPort/login"
@@ -500,7 +500,7 @@ sshPort=$(getSshPort)
 panelPort=$(getPanelPort)
 httpProtcol="http"
 panelPath=$(getPanelPath)
-nethogsLink=https://raw.githubusercontent.com/fdpmart/nethogs-json/main/install.sh
+nethogsLink=https://raw.githubusercontent.com/SoVPN/nethogs-json/main/install.sh
 
 checkRoot
 userInputs
