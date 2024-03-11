@@ -1,6 +1,6 @@
 
 # Set URLs and file paths
-repoLink="https://github.com/fdpmart/SoVPN-SSH-Panel/raw/master/app.zip"
+repoLink="https://github.com/SoVPN/SoVPN-SSH-Panel/raw/master/app.zip"
 
 originalEnvFile="/var/www/html/panel/.env"
 pathDir="/var/www/html"
