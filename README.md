@@ -1,6 +1,6 @@
 <p align="center">
 <picture>
-<img width="160" height="160"  alt="XPanel" src="https://github.com/fdpmart/SoVPN-SSH-Panel/blob/master/images/logo.png">
+<img width="160" height="160"  alt="XPanel" src="https://github.com/SoVPN/SoVPN-SSH-Panel/blob/master/images/logo.png">
 </picture>
   </p> 
 <p align="center">
@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-<img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/fdpmart/SoVPN-SSH-Panel">
+<img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/SoVPN/SoVPN-SSH-Panel">
 </p>
 
 ## معرفی <br>
@@ -37,7 +37,7 @@
 برای نصب دستور زیر را وارد کنید<br>
 
 ```
-bash <(curl -Ls https://raw.githubusercontent.com/fdpmart/SoVPN-SSH-Panel/master/install.sh --ipv4)
+bash <(curl -Ls https://raw.githubusercontent.com/SoVPN/SoVPN-SSH-Panel/master/install.sh --ipv4)
 ```
 
 # آپدیت پنل ادمین
@@ -45,12 +45,12 @@ bash <(curl -Ls https://raw.githubusercontent.com/fdpmart/SoVPN-SSH-Panel/master
 نیازی به نصب مجدد نیست . با این روش فقط پنل ادمین آپدیت می شود . در این روش اطلاعات دیتابیس تغییر نمی کند
 
 ```
-bash <(curl -Ls https://raw.githubusercontent.com/fdpmart/SoVPN-SSH-Panel/master/update-panel.sh --ipv4)
+bash <(curl -Ls https://raw.githubusercontent.com/SoVPN/SoVPN-SSH-Panel/master/update-panel.sh --ipv4)
 ```
 ## فعال سازی SSL
 
 ```
-bash <(curl -Ls https://raw.githubusercontent.com/fdpmart/SoVPN-SSH-Panel/master/ssl.sh --ipv4)
+bash <(curl -Ls https://raw.githubusercontent.com/SoVPN/SoVPN-SSH-Panel/master/ssl.sh --ipv4)
 ```
 
 # بلاک کردن آی پی های ایران
@@ -58,7 +58,7 @@ bash <(curl -Ls https://raw.githubusercontent.com/fdpmart/SoVPN-SSH-Panel/master
 جهت بلاک کردن آی پی های ایران از دستور زیر استفاده کنید
 
 ```
-bash <(curl -Ls https://raw.githubusercontent.com/fdpmart/SoVPN-SSH-Panel/master/block-ir-ip.sh --ipv4)
+bash <(curl -Ls https://raw.githubusercontent.com/SoVPN/SoVPN-SSH-Panel/master/block-ir-ip.sh --ipv4)
 ```
 
 # کانال تلگرام
